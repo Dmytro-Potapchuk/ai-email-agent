@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./my-app
+    container_name: email-agent-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./my-app/.env
+    restart: always
+
+  frontend:
+    build:
+      context: ./creative-compose-agent-main
+    container_name: email-agent-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: always
